@@ -1,13 +1,18 @@
-export interface UserInterface {
-    id: number;
+export interface CreateUserInterface {
     name: string;
     email: string;
     password: string;
-    role: UserRole;    
+    role: UserRole;
+}
+
+export interface UserInterface extends CreateUserInterface {
+    id: string;
+    createdAt?: Date;
+    updatedAt?: Date;
 }
 
 export enum UserRole {
     ADMIN = "admin",
-    USER = "driver"
+    DRIVER = "driver"
 }
 
