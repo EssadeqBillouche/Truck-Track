@@ -1,5 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import { errorMiddleware } from './middlewares/errorMiddleware.js';
 dotenv.config();
 
 
@@ -9,4 +10,6 @@ app.use(express.json());
 
 app.use('/login')
 
+
+app.use(errorMiddleware)
 export default app; 
