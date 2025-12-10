@@ -1,20 +1,17 @@
 import UserModel from "../model/userModel.js";
-import { type registerDTO } from "../dto/auth/AuthDTO.js";
+import { User } from "../entities/User/user.js";
 
 
 export class AuthRepository {
 
 
-    async findByEmail(Email : string){
-        return await UserModel.findOne({email : Email});
+    async findByEmail(email: string) {
+        return await UserModel.findOne({ email });
     }
 
-    async create(data :registerDTO){
-
-        const user = new UserModel({email: data.email,
-            password : data.password,
-            role : data.role
-        })
+    async create(userData: User) {
+        const user = new UserModel(userData.toJSON()); 
         const savedUser = await user.save();
+        return savedUser.toObject(); 
     }
 }
