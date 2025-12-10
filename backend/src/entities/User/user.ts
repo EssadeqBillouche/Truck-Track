@@ -9,14 +9,20 @@ export class User {
     createdAt?: Date;
     updatedAt?: Date;
 
-    constructor(data: UserInterface) {
-        this.id = data.id;
+    constructor(data: Partial<UserInterface> & { name: string; email: string; password: string }) {
+        if (data.id !== undefined) {
+            this.id = data.id;
+        }
         this.name = data.name;
         this.email = data.email;
         this.password = data.password;
-        this.role = data.role ?? UserRole.DRIVER; // Default role as driver
-        this.createdAt = data.createdAt;
-        this.updatedAt = data.updatedAt;
+        this.role = data.role ?? UserRole.DRIVER; 
+        if (data.createdAt !== undefined) {
+            this.createdAt = data.createdAt;
+        }
+        if (data.updatedAt !== undefined) {
+            this.updatedAt = data.updatedAt;
+        }
     }
 
     validateEmail(): boolean {
@@ -37,6 +43,7 @@ export class User {
             id: this.id,
             name: this.name,
             email: this.email,
+            password: this.password,  // Include for saving to DB
             role: this.role,
             createdAt: this.createdAt,
             updatedAt: this.updatedAt
