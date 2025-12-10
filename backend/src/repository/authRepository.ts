@@ -1,12 +1,16 @@
 import UserModel from "../model/userModel.js";
 import { User } from "../entities/User/user.js";
+import { ErrorHandler } from "../helper/ErrorHandler.js";
 
 
 export class AuthRepository {
 
 
     async findByEmail(email: string) {
-        return await UserModel.findOne({ email });
+        const user = await UserModel.findOne({ email });
+        if(!user){
+            throw new ErrorHandler('User Not found', 404)
+        }
     }
 
     async create(userData: User) {
