@@ -17,7 +17,4 @@ export class AuthRepository {
         })
         const savedUser = await user.save();
     }
-
-
-
 }
