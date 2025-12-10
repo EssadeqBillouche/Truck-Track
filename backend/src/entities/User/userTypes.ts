@@ -6,7 +6,7 @@ export interface CreateUserInterface {
 }
 
 export interface UserInterface extends CreateUserInterface {
-    id: string;
+    id?: string;
     createdAt?: Date;
     updatedAt?: Date;
 }
