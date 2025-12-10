@@ -1,15 +1,15 @@
-import express from 'express';
-import dotenv from 'dotenv';
-import { errorMiddleware } from './middlewares/errorMiddleware.js';
-dotenv.config();
-
+import express from "express";
+import authRoutes from "./routes/authRoutes.js";
+import { errorMiddleware } from "./middlewares/errorMiddleware.js";
 
 const app = express();
 
 app.use(express.json());
 
-app.use('/login')
+// routes
+app.use("/api/auth", authRoutes);
 
+// error middleware 
+app.use(errorMiddleware);
 
-app.use(errorMiddleware)
-export default app; 
+export default app;
