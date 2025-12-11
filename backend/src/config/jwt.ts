@@ -7,7 +7,11 @@ export interface jwtDtoPayloud {
 }
 
 
-const jwtKey = process.env.JWTkeys ;
+const jwtKey = process.env.JWTkeys || 'dhdhdhd'; // need to fix default pass
+
+if (!jwtKey) {
+    throw new Error("JWTkeys is not defined in .env");
+}
 
 class jwtHandeler{
 

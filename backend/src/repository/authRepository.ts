@@ -6,11 +6,14 @@ import { ErrorHandler } from "../helper/ErrorHandler.js";
 export class AuthRepository {
 
 
-    async findByEmail(email: string) {
+    async findByEmail(email: string) : Promise<User| null> {
         const user = await UserModel.findOne({ email });
-        if(!user){
-            throw new ErrorHandler('User Not found', 404)
+        if(user){
+            const userObj = user.toObject();
+        return new User({ ...userObj, role: userObj.role as any });
         }
+        return null
+        
     }
 
     async create(userData: User) {
