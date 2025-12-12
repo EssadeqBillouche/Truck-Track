@@ -1,13 +1,28 @@
+import { z } from "zod";
 import { UserRole } from "../../entities/User/userTypes.js";
 
-export type loginDTO = {
-    email : string;
-    password : string;
-}
+// Login Schema
+export const loginSchema = z.object({
+    email: z.string().email("Invalid email format"),
+    password: z.string().min(1, "Password is required")
+});
 
-export type registerDTO = {
-    email: string;
-    password : string;
-    name : string;
-    role : UserRole;
-}
+// Register Schema
+export const registerSchema = z.object({
+    email: z.string().email("Invalid email format"),
+    password: z.string().min(6, "Password must be at least 6 characters"),
+    name: z.string().min(1, "Name is required"),
+    role: z.nativeEnum(UserRole).optional()
+});
+
+// Create Driver Schema (no role - forced to DRIVER)
+export const createDriverSchema = z.object({
+    email: z.string().email("Invalid email format"),
+    password: z.string().min(6, "Password must be at least 6 characters"),
+    name: z.string().min(1, "Name is required")
+});
+
+// Infer types from schemas
+export type loginDTO = z.infer<typeof loginSchema>;
+export type registerDTO = z.infer<typeof registerSchema>;
+export type createDriverDTO = z.infer<typeof createDriverSchema>;

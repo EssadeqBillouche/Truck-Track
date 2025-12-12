@@ -1,23 +1,45 @@
 import type { Request, Response, NextFunction } from "express";
-import type { registerDTO } from "../dto/auth/AuthDTO.js";
+import type { registerDTO, loginDTO } from "../dto/auth/AuthDTO.js";
 import { AuthService } from "../service/AuthService.js";
+import { ErrorHandler } from "../helper/ErrorHandler.js";
 
 export class AuthController {
-  
-    constructor(private authService: AuthService) {}
 
+    constructor(private authService: AuthService) { }
+
+    // Validation is now done by middleware - controller is clean
     register = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
-            const { name, email, password, role } = req.body;
+            const data = req.body as registerDTO;
 
-            if (!email || !password || !name) {
-                res.status(400).json({ message: "Missing required fields" });
-                return;
-            }
+            const user = await this.authService.register(data);
 
-            const user = await this.authService.register({ name, email, password, role } as registerDTO);
+            res.status(201).json({
+                success: true,
+                data: {
+                    user: {
+                        id: user._id,
+                        name: user.name,
+                        email: user.email,
+                        role: user.role
+                    }
+                }
+            });
+        } catch (error) {
+            next(error);
+        }
+    };
 
-            res.status(201).json({ success: true, data: user });
+    login = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const data = req.body as loginDTO;
+
+            const token = await this.authService.login(data);
+
+            res.status(200).json({
+                success: true,
+                data: { token }
+            });
         } catch (error) {
             next(error);
         }
