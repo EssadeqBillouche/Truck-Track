@@ -1,4 +1,4 @@
-import { AuthRepository } from "../repository/authRepository.js";
+import { AuthRepository } from "../repository/AuthRepository.js";
 import { type registerDTO, type loginDTO } from "../dto/auth/AuthDTO.js";
 import { User } from "../entities/User/user.js";
 import { ErrorHandler } from "../helper/ErrorHandler.js";
@@ -45,5 +45,9 @@ export class AuthService {
         });
 
         return token;
+    }
+
+    async getAllDrivers() {
+        return await this.authRepository.findAllDrivers();
     }
 }
