@@ -7,7 +7,6 @@ export class AuthController {
 
     constructor(private authService: AuthService) { }
 
-    // Validation is now done by middleware - controller is clean
     register = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const data = req.body as registerDTO;

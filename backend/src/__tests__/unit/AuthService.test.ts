@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, jest } from "@jest/globals";
 import { AuthService } from "../../service/AuthService.js";
-import { AuthRepository } from "../../repository/authRepository.js";
+import { AuthRepository } from "../../repository/AuthRepository.js";
 import { UserRole } from "../../entities/User/userTypes.js";
 import { User } from "../../entities/User/user.js";
 import { ErrorHandler } from "../../helper/ErrorHandler.js";

@@ -43,7 +43,7 @@ export class User {
             id: this.id,
             name: this.name,
             email: this.email,
-            password: this.password,  // Include for saving to DB
+            password: this.password,  
             role: this.role,
             createdAt: this.createdAt,
             updatedAt: this.updatedAt

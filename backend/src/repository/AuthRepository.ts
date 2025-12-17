@@ -21,4 +21,9 @@ export class AuthRepository {
         const savedUser = await user.save();
         return savedUser.toObject(); 
     }
+
+    async findAllDrivers() {
+        const drivers = await UserModel.find({ role: 'driver' }).select('-password');
+        return drivers.map(driver => driver.toObject());
+    }
 }

@@ -32,4 +32,17 @@ export class DriverController {
             next(error);
         }
     };
+
+    getAllDrivers = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const drivers = await this.authService.getAllDrivers();
+            
+            res.status(200).json({
+                success: true,
+                data: drivers
+            });
+        } catch (error) {
+            next(error);
+        }
+    };
 }

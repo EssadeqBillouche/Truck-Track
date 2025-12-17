@@ -34,8 +34,9 @@ const seedAdmin = async () => {
         await admin.save();
         console.log("Admin created successfully!");
         console.log("Email: admin@trucktrack.com");
-        console.log("Password: Admin@123");
-        console.log("⚠️  Change this password after first login!");
+        console.log(" <<<< Change this password after first login! >>>>");
+        console.log("<<<<Password: Admin@123>>>>");
+        console.log("<<<< Change this password after first login! >>>>");
 
     } catch (error) {
         console.error("Error seeding admin:", error);
